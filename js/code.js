@@ -13,6 +13,13 @@ function getStyle(feature) {
     };
 }
 
+function bindTooltip(feature, layer) {
+    if (feature.properties && feature.properties.name) {
+        layer.bindTooltip(feature.properties.name);
+    }
+}
+
+
 initMap = (data) => {
 
     let map = L.map('map', {
@@ -20,7 +27,8 @@ initMap = (data) => {
     })
 
     let geoJson = L.geoJson(data, {
-        style: getStyle
+        style: getStyle,
+        onEachFeature: bindTooltip
     }).addTo(map);
 
 
