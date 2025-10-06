@@ -26,10 +26,19 @@ initMap = (data) => {
         minZoom: -3
     })
 
+    let osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap"
+    }).addTo(map);
+
+
     let geoJson = L.geoJson(data, {
         style: getStyle,
         onEachFeature: bindTooltip
     }).addTo(map);
+
+    let baseMaps = {
+        "OpenStreetMap": osm
+    };
 
 
     map.fitBounds(geoJson.getBounds());
